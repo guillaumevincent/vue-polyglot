@@ -79,6 +79,10 @@ Vue.component({
 
 ### $t(id)
 
+usage:
+
+    $t('hello world', 'Hello World!')
+
 locales:
 
 ```js
@@ -87,19 +91,19 @@ locales:
 }
 ```
 
-browser lang : `en-US`
+result:
 
-`$t('hello world')` > `'hello world'` 
-
-browser lang : `zh-CN`
-
-`$t('hello world')` > `'hello world'` 
-
-browser lang : `fr-FR`
-
-`$t('hello world')` > `'bonjour monde'` 
+browser locale | translation key | translated text | comment
+| --- | --- | ---- | ---
+`en-US` | `hello world` | _Hello World!_ | -
+`zh-CN` | `hello world` | _Hello World!_ | (fallback value)
+`fr-FR` | `hello world` | _Bonjour monde!_ | -
 
 ### $t(id, defaultMessage)
+
+usage: 
+
+    $t('error684', 'User already exists')
 
 locales:
 
@@ -109,16 +113,18 @@ locales:
 }
 ```
 
-browser lang : `en-US`
+result:
 
-`$t('error684', 'User already exists')` > `'User already exists'` 
-
-browser lang : `fr-FR`
-
-`$t('error684', 'User already exists')`  > `"L'utilisateur existe déjà"` 
-
+browser locale | translation key | translated text
+| --- | --- | ----
+`en-US` | `User already exists` | _User already exists_ 
+`fr-FR` | `User already exists` | _L'utilisateur existe déjà_
 
 ### $t(id, defaultMessage, context)
+
+usage: 
+
+    `$t('error684', 'User ${user} already exists', {user: 'Guillaume'})`
 
 locales:
 
@@ -128,14 +134,12 @@ locales:
 }
 ```
 
-browser lang : `en-US`
+result:
 
-`$t('error684', 'User ${user} already exists', {user: 'Guillaume'})` > `'User Guillaume already exists'` 
-
-browser lang : `fr-FR`
-
-`$t('error684', 'User ${user} already exists', {user: 'Guillaume'})`  > `"L'utilisateur Guillaume existe déjà"` 
-
+browser locale | translation key | translated text
+| --- | --- | ----
+`en-US` | `User already exists` | _User Guillaume already exists_ 
+`fr-FR` | `User already exists` | _L'utilisateur Guillaume existe déjà_
 
 ### Loading translations synchronously
 
