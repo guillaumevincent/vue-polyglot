@@ -1,0 +1,4 @@
+{
+  "hello": "bonjour",
+  "helloUser": "bonjour {user}"
+}

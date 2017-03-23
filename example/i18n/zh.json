@@ -1,0 +1,4 @@
+{
+  "hello": "你好",
+  "helloUser": "你好 {user}"
+}
