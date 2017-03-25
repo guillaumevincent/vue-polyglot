@@ -35,9 +35,9 @@ So yes it's like Vue-i18n or Vue-Translate but the API corresponds to my needs.
 ```html
 <body>
 <div id="test">
-  <p>lang: {{this.$polyglot.lang}}</p>
-  <p>$t('hello', 'Hello !'): {{$t('hello', 'Hello !')}}</p>
-  <p>$t('helloUser', 'hello {user}', {user: 'toto'}): {{$t('helloUser', 'hello {user}', {user: 'toto'})}}</p>
+  <p>{{this.$polyglot.lang}}</p>
+  <p>{{$t('hello', 'Hello !')}}</p>
+  <p>{{$t('helloUser', 'hello {user}', {user: 'toto'})}}</p>
   <button v-on:click="showAppInChinese">show App in Chinese</button>
 </div>
 
