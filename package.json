@@ -42,9 +42,9 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.24.0",
     "babel-runtime": "^6.23.0",
-    "husky": "^0.13.2",
+    "husky": "^0.13.3",
     "vue": "^2.2.5",
-    "webpack": "^2.2.1"
+    "webpack": "^2.3.2"
   },
   "ava": {
     "require": [
