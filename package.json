@@ -24,8 +24,8 @@
   "scripts": {
     "precommit": "npm test",
     "prepush": "npm test",
-    "build": "webpack && npm run build:min",
-    "build:min": "rm -rf dist && NODE_ENV=production webpack -p",
+    "build": "rm -rf dist && webpack && npm run build:min",
+    "build:min": "NODE_ENV=production webpack -p",
     "prepublish": "npm run build",
     "test": "ava test --compilers js:babel-register",
     "test:watch": "npm test -- --watch"
