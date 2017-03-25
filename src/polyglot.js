@@ -3,12 +3,14 @@ import i18n from '../src/i18n';
 
 let vm = null;
 
-module.exports = {
+export default {
   install(Vue, options = {languagesAvailable: [], defaultLanguage: 'en-US'}) {
     if (!vm) {
       vm = new Vue({
         data(){
           return {
+            languagesAvailable: options.languagesAvailable,
+            defaultLanguage: options.defaultLanguage,
             lang: this.getLang(),
             locales: {}
           };
@@ -17,6 +19,9 @@ module.exports = {
         computed: {
           lang() {
             return this.lang;
+          },
+          languagesAvailable() {
+            return this.languagesAvailable;
           },
           locale() {
             if (!this.locales[this.lang]) {
@@ -30,6 +35,11 @@ module.exports = {
           setLang({lang}) {
             this.lang = lang;
           },
+          addLangInLanguagesAvailable({lang}) {
+            if (this.languagesAvailable.indexOf(lang) === -1) {
+              this.languagesAvailable.push(lang);
+            }
+          },
           setLocale({lang, locale}) {
             this.locales = Object.assign({}, this.locales, {[lang]: locale});
           },
@@ -39,15 +49,15 @@ module.exports = {
             const defaultLanguage = options.defaultLanguage;
             return i18n.getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage);
           },
-          getLocales({baseURL = 'i18n', lang = this.getLang()} = {}){
+          getLocale({baseURL = 'i18n', lang = 'auto'} = {}){
+            lang = lang === 'auto' ? this.getLang() : lang;
             if (lang !== options.defaultLanguage) {
-              return axios
-                .get(`${baseURL}/${lang}.json`)
+              axios.get(`${baseURL}/${lang}.json`)
                 .then(response => {
                   const locale = response.data;
-                  this.setLang({lang});
                   this.setLocale({lang, locale});
-                  return {lang, locale};
+                  this.setLang({lang});
+                  this.addLangInLanguagesAvailable({lang});
                 });
             }
           },

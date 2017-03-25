@@ -2,19 +2,11 @@
 
 > basic translation plugin for VueJS 2+
 
-## Vue-Polyglot v0.1.0
-
-:construction: this plugin is in construction, so API can change.
-Wait for version 1.0.0 for production use.
+## Vue-Polyglot v0.1.3
 
 ## Installation
 
-    npm install vue-polyglot
-
-## Is it like Vue-i18n or Vue-Translate?
-
-Vue-Polyglot is also a plugin used to translate your pages. 
-So yes it's like Vue-i18n or Vue-Translate but the API corresponds to my needs.
+    npm install --save vue-polyglot
 
 ## TLDR
 
@@ -30,44 +22,58 @@ So yes it's like Vue-i18n or Vue-Translate but the API corresponds to my needs.
  
     `this.$t('helloUser', 'hello {user}', {user: 'toto'})` > _hello toto_
 
+## Demo
+
+[demo](https://guillaumevincent.github.io/vue-polyglot/example/)
+
 ## Example
 
 ```html
-<body>
-<div id="test">
-  <p>{{this.$polyglot.lang}}</p>
-  <p>{{$t('hello', 'Hello !')}}</p>
-  <p>{{$t('helloUser', 'hello {user}', {user: 'toto'})}}</p>
-  <button v-on:click="showAppInChinese">show App in Chinese</button>
+<div id="app">
+  <h1>{{$t('title', 'Vue-Polyglot in English')}}</h1>
+  <p>{{ createdBy }}</p>
+  <p>
+    <button type="button"
+            v-for="lang in this.$polyglot.languagesAvailable"
+            v-on:click="showAppIn(lang)">
+      {{lang}}
+    </button>
+  </p>
 </div>
+```
 
-<script>
-  Vue.use(Polyglot, {
-    defaultLanguage: 'en',
-    languagesAvailable: ['zh', 'fr']
-  });
+```js
+import Polyglot from 'vue-polyglot';
 
-  Vue.locales({
-    'fr': {
-      'hello': 'bonjour',
-      'helloUser': 'bonjour {user}'
-    },
-    'zh': {
-      'hello': '你好',
-      'helloUser': '你好 {user}'
+Vue.use(window.Polyglot.default, {
+  defaultLanguage: 'en',
+  languagesAvailable: ['fr', 'es']
+});
+
+Vue.locales({
+  'fr': {
+    'title': 'Vue-Polyglot en Français',
+    'createdBy': 'Créé par {user}',
+  },
+  'es': {
+    'title': 'Vue-Polyglot en Español',
+    'createdBy': 'Creado por {user}',
+  }
+});
+
+new Vue({
+  el: '#app',
+  methods: {
+    showAppIn: function(lang) {
+      this.$polyglot.setLang({lang: lang});
     }
-  });
-
-  new Vue({
-    el: '#test',
-    methods: {
-      showAppInChinese() {
-        this.$polyglot.setLang('zh');
-      }
+  },
+  computed: {
+    createdBy: function() {
+      return this.$t('createdBy', 'Created by {user}', {user: 'Guillaume Vincent (@guillaume20100)'});
     }
-  })
-</script>
-</body>
+  }
+});
 ```
 
 ## API
@@ -81,25 +87,25 @@ Vue.use(Polyglot, {
 Vue.locales({
   'fr': {
     'hello': 'bonjour',
-    'helloUser': 'bonjour {user}'
+    'hiUser': 'bonjour {user}'
   },
   'zh': {
     'hello': '你好',
-    'helloUser': '你好 {user}'
+    'hiUser': '你好 {user}'
   }
 })
 ```
 
 ### $t(key[, fallbackMessage][, data])
 
-| browser locale | translation key | translated text |
+| browser locale | method | translated text |
 | --- | --- | ---- |
 |`en-US` | `$t('hello')` | _hello_ |
 |`zh-CN` | `$t('hello')` | _你好_ |
 |`fr-FR` | `$t('hello')` | _bonjour_ |
 |`en-US` | `$t('hello', 'Hello !')` | _Hello !_ |
-|`es-ES` | `$t('helloUser', 'hello {user}', {user: 'toto'})` | _hello toto_ |
-|`fr-FR` | `$t('helloUser', 'hello {user}', {user: 'toto'})` | _bonjour toto_ |
+|`es-ES` | `this.$t('hiUser', 'hi {user}', {user: 'Guillaume'})` | _hello Guillaume_ |
+|`fr-FR` | `this.$t('hiUser', 'hi {user}', {user: 'Guillaume'})` | _bonjour Guillaume_ |
 
 
 ### Loading translations synchronously
@@ -119,7 +125,7 @@ Vue.locales({
 
 ### Loading translation file asynchronously
 
-#### this.$polyglot.getLocales(options = {baseURL = 'i18n', lang = 'auto'})
+#### this.$polyglot.getLocale(options = {baseURL = 'i18n', lang = 'auto'})
 
 ```js
 Vue.use(Polyglot, {
@@ -130,18 +136,20 @@ Vue.use(Polyglot, {
 new Vue({
     el: '#test',
     beforeCreate() {
-      this.$polyglot.getLocales({baseURL: 'dist/i18n'});
+      this.$polyglot.getLocale({baseURL: 'dist/i18n'});
     },
     methods: {
       getTranslationAndShowAppInChinese() {
-        this.$polyglot.getLocales({lang: 'zh'});
+        this.$polyglot.getLocale({lang: 'zh'});
       }
     }
   })
 ```
 
 It will load asynchronously translations using browser's language.  
-For example if browser language is `fr-FR`, languages available are `['zh', 'fr']`, `this.$polyglot.getLocales('dist/i18n')` will get translations from `/dist/i18n/fr.json` file.
+For example if browser language is `fr-FR`, languages available are `['zh', 'fr']`, `this.$polyglot.getLocale({baseURL: 'dist/i18n'})` will get translation from `dist/i18n/fr.json` file.
+
+`this.$polyglot.getLocale({lang: 'zh'})` will get translation from `i18n/zh.json` file.
 
 
 ### Changing the language to use
@@ -159,7 +167,8 @@ Vue.component({
 
 ## Similar plugin
 
-Vue-Polyglot is similar to [Vue-Translate](https://github.com/javisperez/vuetranslate)
+ * [vue-i18n](https://github.com/kazupon/vue-i18n)
+ * [VueTranslate](https://github.com/javisperez/vuetranslate)
 
 
 ## License
