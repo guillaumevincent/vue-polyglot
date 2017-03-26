@@ -19,15 +19,13 @@
     "src"
   ],
   "main": "dist/polyglot.js",
-  "module": "src/polyglot.js",
   "repository": "guillaumevincent/vue-polyglot",
   "scripts": {
     "precommit": "npm test",
     "prepush": "npm test",
-    "build": "rm -rf dist && webpack && npm run build:min",
-    "build:min": "NODE_ENV=production webpack -p",
-    "prepublish": "npm run build",
-    "test": "ava test --compilers js:babel-register",
+    "build": "rm -rf dist && rollup --config rollup.config.js && npm run build:min",
+    "build:min": "uglifyjs --compress --mangle --output dist/polyglot.min.js -- dist/polyglot.js",
+    "test": "BABEL_ENV=test ava test",
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
@@ -36,15 +34,13 @@
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
-    "babel-preset-stage-2": "^6.22.0",
-    "babel-register": "^6.24.0",
-    "babel-runtime": "^6.23.0",
     "husky": "^0.13.3",
-    "vue": "^2.2.5",
-    "webpack": "^2.3.2"
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "uglify-js": "^2.8.16"
   },
   "ava": {
     "require": [
@@ -52,13 +48,18 @@
     ]
   },
   "babel": {
-    "comments": false,
-    "plugins": [
-      "transform-runtime"
-    ],
+    "env": {
+      "test": {
+        "presets": ["@ava/stage-4"]
+      }
+    },
     "presets": [
-      "es2015",
-      "stage-2"
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ]
     ]
   }
 }

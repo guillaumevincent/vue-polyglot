@@ -1,7 +1,8 @@
-import axios from 'axios';
+"use strict";
+import axios from 'axios/dist/axios';
 import i18n from '../src/i18n';
 
-let vm = null;
+let vm;
 
 export default {
   install(Vue, options = {languagesAvailable: [], defaultLanguage: 'en-US'}) {
