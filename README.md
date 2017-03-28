@@ -2,7 +2,7 @@
 
 > basic translation plugin for VueJS 2+
 
-## Vue-Polyglot v0.1.3
+## Vue-Polyglot
 
 ## Installation
 
@@ -164,6 +164,10 @@ Vue.component({
   }
 });
 ```
+
+## Utils
+
+See [Vue-Polyglot-Utils](https://github.com/guillaumevincent/vue-polyglot-utils)
 
 ## Similar plugin
 
