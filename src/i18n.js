@@ -22,8 +22,13 @@ export default {
   getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage){
     for (let i = 0; i < languagesAvailable.length; i++) {
       const lang = languagesAvailable[i];
-      const closeLanguages = lang.split('-')[0] === navigatorLanguage || navigatorLanguage.split('-')[0] === lang;
-      if (lang === navigatorLanguage || closeLanguages) {
+      if (lang === navigatorLanguage) {
+        return lang;
+      }
+    }
+    for (let i = 0; i < languagesAvailable.length; i++) {
+      const lang = languagesAvailable[i];
+      if (lang.split('-')[0] === navigatorLanguage || navigatorLanguage.split('-')[0] === lang) {
         return lang;
       }
     }

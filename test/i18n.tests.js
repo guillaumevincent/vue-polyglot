@@ -81,3 +81,9 @@ test('get best language fallback', t=>{
   const defaultLanguage = 'en-US';
   t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage), 'en-US')
 });
+
+test('get best language with two langs', t=>{
+  const navigatorLanguage = 'zh-CN';
+  const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
+  t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage), 'zh-CN')
+});
