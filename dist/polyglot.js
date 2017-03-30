@@ -1540,9 +1540,14 @@ var i18n = {
   getBestLanguage: function getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage) {
     for (var i = 0; i < languagesAvailable.length; i++) {
       var lang = languagesAvailable[i];
-      var closeLanguages = lang.split('-')[0] === navigatorLanguage || navigatorLanguage.split('-')[0] === lang;
-      if (lang === navigatorLanguage || closeLanguages) {
+      if (lang === navigatorLanguage || lang.toLowerCase() === navigatorLanguage) {
         return lang;
+      }
+    }
+    for (var _i = 0; _i < languagesAvailable.length; _i++) {
+      var _lang = languagesAvailable[_i];
+      if (_lang.split('-')[0] === navigatorLanguage || navigatorLanguage.split('-')[0] === _lang) {
+        return _lang;
       }
     }
     return defaultLanguage;
