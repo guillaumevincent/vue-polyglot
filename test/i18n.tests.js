@@ -87,3 +87,15 @@ test('get best language with two langs', t=>{
   const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
   t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage), 'zh-CN')
 });
+
+test('get best language with minuscules (thanks Safari)', t=>{
+  const navigatorLanguage = 'zh-cn';
+  const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
+  t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage), 'zh-CN')
+});
+
+test('get best language with variant', t=>{
+  const navigatorLanguage = 'zh-hk';
+  const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
+  t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage), 'zh')
+});

@@ -22,7 +22,7 @@ export default {
   getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage){
     for (let i = 0; i < languagesAvailable.length; i++) {
       const lang = languagesAvailable[i];
-      if (lang === navigatorLanguage) {
+      if (lang === navigatorLanguage || lang.toLowerCase() === navigatorLanguage) {
         return lang;
       }
     }
