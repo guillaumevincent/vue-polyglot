@@ -46,7 +46,7 @@ export default {
           },
           getLang(){
             const languagesAvailable = options.languagesAvailable;
-            const navigatorLanguage = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
+            const navigatorLanguage = window.navigator.userLanguage || window.navigator.language;
             const defaultLanguage = options.defaultLanguage;
             return i18n.getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage);
           },

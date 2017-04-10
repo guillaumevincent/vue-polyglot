@@ -99,3 +99,9 @@ test('get best language with variant', t=>{
   const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
   t.is(i18n.getBestLanguage(languagesAvailable, navigatorLanguage), 'zh')
 });
+
+test('get best language with navigator language undefined', t=>{
+  const defaultLanguage = 'en-US';
+  const languagesAvailable = ['en', 'fr', 'zh', 'zh-CN'];
+  t.is(i18n.getBestLanguage(languagesAvailable, undefined, defaultLanguage), 'en-US')
+});
