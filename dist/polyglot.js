@@ -1538,6 +1538,9 @@ var i18n = {
     });
   },
   getBestLanguage: function getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage) {
+    if (typeof navigatorLanguage === 'undefined') {
+      return defaultLanguage;
+    }
     for (var i = 0; i < languagesAvailable.length; i++) {
       var lang = languagesAvailable[i];
       if (lang === navigatorLanguage || lang.toLowerCase() === navigatorLanguage) {
@@ -1610,7 +1613,7 @@ var polyglot = {
           },
           getLang: function getLang() {
             var languagesAvailable = options.languagesAvailable;
-            var navigatorLanguage = navigator.languages ? navigator.languages[0] : navigator.language || navigator.userLanguage;
+            var navigatorLanguage = window.navigator.userLanguage || window.navigator.language;
             var defaultLanguage = options.defaultLanguage;
             return i18n.getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage);
           },
