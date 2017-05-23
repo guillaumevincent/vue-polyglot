@@ -18,12 +18,6 @@ export default {
         },
 
         computed: {
-          lang() {
-            return this.lang;
-          },
-          languagesAvailable() {
-            return this.languagesAvailable;
-          },
           locale() {
             if (!this.locales[this.lang]) {
               return null;
