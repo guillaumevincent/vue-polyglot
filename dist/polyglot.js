@@ -1578,12 +1578,6 @@ var polyglot = {
 
 
         computed: {
-          lang: function lang() {
-            return this.lang;
-          },
-          languagesAvailable: function languagesAvailable() {
-            return this.languagesAvailable;
-          },
           locale: function locale() {
             if (!this.locales[this.lang]) {
               return null;
