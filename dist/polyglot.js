@@ -1578,12 +1578,6 @@ var polyglot = {
 
 
         computed: {
-          lang: function lang() {
-            return this.lang;
-          },
-          languagesAvailable: function languagesAvailable() {
-            return this.languagesAvailable;
-          },
           locale: function locale() {
             if (!this.locales[this.lang]) {
               return null;
@@ -1624,11 +1618,13 @@ var polyglot = {
                 _ref4$baseURL = _ref4.baseURL,
                 baseURL = _ref4$baseURL === undefined ? 'i18n' : _ref4$baseURL,
                 _ref4$lang = _ref4.lang,
-                lang = _ref4$lang === undefined ? 'auto' : _ref4$lang;
+                lang = _ref4$lang === undefined ? 'auto' : _ref4$lang,
+                _ref4$ext = _ref4.ext,
+                ext = _ref4$ext === undefined ? '.json' : _ref4$ext;
 
             lang = lang === 'auto' ? this.getLang() : lang;
             if (lang !== options.defaultLanguage) {
-              axios.get(baseURL + '/' + lang + '.json').then(function (response) {
+              axios.get(baseURL + '/' + lang + ext).then(function (response) {
                 var locale = response.data;
                 _this.setLocale({ lang: lang, locale: locale });
                 _this.setLang({ lang: lang });
