@@ -104,7 +104,7 @@ Vue.locales({
 |`zh-CN` | `$t('hello')` | _你好_ |
 |`fr-FR` | `$t('hello')` | _bonjour_ |
 |`en-US` | `$t('hello', 'Hello !')` | _Hello !_ |
-|`es-ES` | `this.$t('hiUser', 'hi {user}', {user: 'Guillaume'})` | _hello Guillaume_ |
+|`es-ES` | `this.$t('hiUser', 'hi {user}', {user: 'Guillaume'})` | _hi Guillaume_ |
 |`fr-FR` | `this.$t('hiUser', 'hi {user}', {user: 'Guillaume'})` | _bonjour Guillaume_ |
 
 
