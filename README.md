@@ -152,6 +152,23 @@ For example if browser language is `fr-FR`, languages available are `['zh', 'fr'
 `this.$polyglot.getLocale({lang: 'zh'})` will get translation from `i18n/zh.json` file.
 
 
+### Extend translations synchronously
+Vue.locales replace all locales. If you want to update translations use `extendLocales` method instead:
+
+```js
+this.$polyglot.extendLocales({
+  'fr': {
+    'title': 'Vue-Polyglot en Français (🦄🖐️)'
+  },
+  'es': {
+    'title': 'Vue-Polyglot en Español (🦄🖐️)',
+  },
+  'zh': {
+    'title': 'Vue-Polyglot在中国 (🦄🖐️)',
+  }
+});
+```
+
 ### Changing the language to use
 
 Use the `setLang` method of the `$polyglot` property, like this:

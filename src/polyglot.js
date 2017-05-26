@@ -38,6 +38,12 @@ export default {
           setLocale({lang, locale}) {
             this.locales = Object.assign({}, this.locales, {[lang]: locale});
           },
+          extendLocales(locales){
+            Object.keys(locales).forEach(lang => {
+              const locale = this.locales.hasOwnProperty(lang) ? Object.assign({}, this.locales[lang], locales[lang]) : locales[lang];
+              this.setLocale({lang, locale});
+            })
+          },
           getLang(){
             const languagesAvailable = options.languagesAvailable;
             const navigatorLanguage = window.navigator.userLanguage || window.navigator.language;
@@ -74,7 +80,7 @@ export default {
     });
 
     Vue.locales = (locales) => {
-      Object.keys(locales).forEach(function(lang) {
+      Object.keys(locales).forEach(lang => {
         vm.$polyglot.setLocale({lang, locale: locales[lang]});
       })
     };
