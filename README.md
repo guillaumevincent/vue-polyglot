@@ -125,7 +125,7 @@ Vue.locales({
 
 ### Loading translation file asynchronously
 
-#### this.$polyglot.getLocale(options = {baseURL = 'i18n', lang = 'auto'})
+#### this.$polyglot.getLocale(options = {baseURL = 'i18n', lang = 'auto', ext = 'json'})
 
 ```js
 Vue.use(Polyglot, {

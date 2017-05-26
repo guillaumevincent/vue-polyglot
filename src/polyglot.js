@@ -44,10 +44,10 @@ export default {
             const defaultLanguage = options.defaultLanguage;
             return i18n.getBestLanguage(languagesAvailable, navigatorLanguage, defaultLanguage);
           },
-          getLocale({baseURL = 'i18n', lang = 'auto'} = {}){
+          getLocale({baseURL = 'i18n', lang = 'auto', ext = 'json'} = {}){
             lang = lang === 'auto' ? this.getLang() : lang;
             if (lang !== options.defaultLanguage) {
-              axios.get(`${baseURL}/${lang}.json`)
+              axios.get(`${baseURL}/${lang}.${ext}`)
                 .then(response => {
                   const locale = response.data;
                   this.setLocale({lang, locale});
