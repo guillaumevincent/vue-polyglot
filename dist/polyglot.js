@@ -1628,11 +1628,11 @@ var polyglot = {
                 _ref4$lang = _ref4.lang,
                 lang = _ref4$lang === undefined ? 'auto' : _ref4$lang,
                 _ref4$ext = _ref4.ext,
-                ext = _ref4$ext === undefined ? 'json' : _ref4$ext;
+                ext = _ref4$ext === undefined ? '.json' : _ref4$ext;
 
             lang = lang === 'auto' ? this.getLang() : lang;
             if (lang !== options.defaultLanguage) {
-              axios.get(baseURL + '/' + lang + '.' + ext).then(function (response) {
+              axios.get(baseURL + '/' + lang + ext).then(function (response) {
                 var locale = response.data;
                 _this2.setLocale({ lang: lang, locale: locale });
                 _this2.setLang({ lang: lang });
