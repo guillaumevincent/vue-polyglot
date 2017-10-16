@@ -62,7 +62,7 @@ export default {
                 });
             }
           },
-          _t(key, fallbackMessage, data) {
+          _translate(key, fallbackMessage, data) {
             return i18n.translate(this.locale, key, fallbackMessage, data);
           },
         }
@@ -74,7 +74,7 @@ export default {
     Vue.mixin({
       methods: {
         $t(key, fallbackMessage, data) {
-          return this.$polyglot._t(key, fallbackMessage, data);
+          return this.$polyglot._translate(key, fallbackMessage, data);
         }
       }
     });
