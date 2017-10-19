@@ -1640,7 +1640,7 @@ var polyglot = {
               });
             }
           },
-          _t: function _t(key, fallbackMessage, data) {
+          _translate: function _translate(key, fallbackMessage, data) {
             return i18n.translate(this.locale, key, fallbackMessage, data);
           }
         }
@@ -1652,7 +1652,7 @@ var polyglot = {
     Vue.mixin({
       methods: {
         $t: function $t(key, fallbackMessage, data) {
-          return this.$polyglot._t(key, fallbackMessage, data);
+          return this.$polyglot._translate(key, fallbackMessage, data);
         }
       }
     });
