@@ -21,6 +21,10 @@
  * load data in translation
  
     `this.$t('helloUser', 'hello {user}', {user: 'toto'})` > _hello toto_
+    
+### Disclaimer:
+
+This is not a plugin to integrate AirBnb's [Polyglot.js](http://airbnb.io/polyglot.js/) into Vue, but a different implementation of its own.
 
 ## Demo
 
