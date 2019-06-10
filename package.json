@@ -18,7 +18,8 @@
     "dist",
     "src"
   ],
-  "main": "dist/polyglot.js",
+  "main": "dist/polyglot.min.js",
+  "module": "src/polyglot.js",
   "repository": "guillaumevincent/vue-polyglot",
   "scripts": {
     "precommit": "npm test",

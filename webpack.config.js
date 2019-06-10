@@ -6,5 +6,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "polyglot.min.js",
     library: "Polyglot",
+    libraryTarget: "umd"
   }
 };
