@@ -1,6 +1,6 @@
 {
   "name": "vue-polyglot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "basic translation plugin for VueJS 2+",
   "keywords": [
     "vue",
