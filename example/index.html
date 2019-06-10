@@ -1,121 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Vue-Polyglot example</title>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="../dist/polyglot.min.js"></script>
-  <style>
-    code,
-    pre {
-      background: #f5f7f9;
-      text-decoration: none;
-      font-size: 0.8em;
-    }
-  </style>
-</head>
-<body>
-<div id="app">
-  <div id="htmlCode" class="container text-center mt-3">
-    <h1 class="jumbotron-heading">{{$t('title', 'Vue-Polyglot in English')}}</h1>
-    <p class="lead text-muted">{{ createdBy }}</p>
-    <p>
-      <button class="btn btn-primary mr-2"
-              type="button"
-              v-for="lang in this.$polyglot.languagesAvailable"
-              v-on:click="showAppIn(lang)">
-        {{lang}}
-      </button>
-      <button class="btn btn-warning"
-              type="button"
-              v-on:click="getTranslationAndShowAppInChinese()">
-        {{ $t('Load Chinese Translation') }}
-      </button>
-      <button class="btn btn-default"
-              type="button"
-              v-on:click="extendLocales()">
-        {{ $t('Update translation') }}
-      </button>
-
-    </p>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue-Polyglot example</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+      crossorigin="anonymous"
+    />
+    <script src="../dist/polyglot.min.js"></script>
+    <style>
+      code,
+      pre {
+        background: #f5f7f9;
+        text-decoration: none;
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="htmlCode" class="container text-center mt-3">
+        <h1 class="jumbotron-heading">
+          {{ $t("title", "Vue-Polyglot in English") }}
+        </h1>
+        <p class="lead text-muted">{{ createdBy }}</p>
         <p>
-          Languages available:
+          <button
+            class="btn btn-primary mr-2"
+            type="button"
+            v-for="lang in this.$polyglot.languagesAvailable"
+            v-on:click="showAppIn(lang)"
+          >
+            {{ lang }}
+          </button>
+          <button
+            class="btn btn-warning"
+            type="button"
+            v-on:click="getTranslationAndShowAppInChinese()"
+          >
+            {{ $t("Load Chinese Translation") }}
+          </button>
+          <button
+            class="btn btn-default"
+            type="button"
+            v-on:click="extendLocales()"
+          >
+            {{ $t("Update translation") }}
+          </button>
         </p>
-        <pre><code>{{this.$polyglot.languagesAvailable}}</code></pre>
-        <p>
-          Locales:
-        </p>
-        <pre><code>{{$polyglot.locales}}</code></pre>
       </div>
-      <div class="col-md-6">
-        JS code:
-        <pre><code><span id="sourceCode"></span></code></pre>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>
+              Languages available:
+            </p>
+            <pre><code>{{this.$polyglot.languagesAvailable}}</code></pre>
+            <p>
+              Locales:
+            </p>
+            <pre><code>{{$polyglot.locales}}</code></pre>
+          </div>
+          <div class="col-md-6">
+            JS code:
+            <pre><code><span id="sourceCode"></span></code></pre>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<!--<script src="./app.js"></script>-->
-<script id="jsCode">
-  Vue.use(Polyglot, {
-    defaultLanguage: 'en',
-    languagesAvailable: ['fr', 'es']
-  });
+    <script id="jsCode">
+      Vue.use(Polyglot, {
+        defaultLanguage: "en",
+        languagesAvailable: ["fr", "es"]
+      });
 
-  Vue.locales({
-    'fr': {
-      'title': 'Vue-Polyglot en Français',
-      'createdBy': 'Créé par {user}',
-      'Load Chinese Translation': 'Charger la traduction en chinois',
-      'Update translation': 'Mettre à jour les traductions',
-    },
-    'es': {
-      'title': 'Vue-Polyglot en Español',
-      'createdBy': 'Creado por {user}',
-      'Load Chinese Translation': 'Cargar Traducción Chino',
-      'Update translation': 'Actualizar traducción',
-    }
-  });
+      Vue.locales({
+        fr: {
+          title: "Vue-Polyglot en Français",
+          createdBy: "Créé par {user}",
+          "Load Chinese Translation": "Charger la traduction en chinois",
+          "Update translation": "Mettre à jour les traductions"
+        },
+        es: {
+          title: "Vue-Polyglot en Español",
+          createdBy: "Creado por {user}",
+          "Load Chinese Translation": "Cargar Traducción Chino",
+          "Update translation": "Actualizar traducción"
+        }
+      });
 
-  new Vue({
-    el: '#app',
-    methods: {
-      showAppIn: function(lang) {
-        this.$polyglot.setLang({lang: lang});
-      },
-      getTranslationAndShowAppInChinese: function() {
-        this.$polyglot.getLocale({lang: 'zh'});
-      },
-      extendLocales(){
-        this.$polyglot.extendLocales({
-          'fr': {
-            'title': 'Vue-Polyglot en Français (🦄🖐️)'
+      new Vue({
+        el: "#app",
+        methods: {
+          showAppIn: function(lang) {
+            this.$polyglot.setLang({ lang: lang });
           },
-          'es': {
-            'title': 'Vue-Polyglot en Español (🦄🖐️)',
+          getTranslationAndShowAppInChinese: function() {
+            this.$polyglot.getLocale({ lang: "zh" });
           },
-          'zh': {
-            'title': 'Vue-Polyglot在中国 (🦄🖐️)',
+          extendLocales() {
+            this.$polyglot.extendLocales({
+              fr: {
+                title: "Vue-Polyglot en Français (🦄🖐️)"
+              },
+              es: {
+                title: "Vue-Polyglot en Español (🦄🖐️)"
+              },
+              zh: {
+                title: "Vue-Polyglot在中国 (🦄🖐️)"
+              }
+            });
           }
-        });
-      }
-    },
-    computed: {
-      createdBy: function() {
-        return this.$t('createdBy', 'Created by {user}', {user: 'Guillaume Vincent (@guillaume20100)'});
-      }
-    }
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("sourceCode").innerHTML = document.getElementById("jsCode").innerHTML;
-  });
-</script>
-</body>
+        },
+        computed: {
+          createdBy: function() {
+            return this.$t("createdBy", "Created by {user}", {
+              user: "Guillaume Vincent (@guillaume20100)"
+            });
+          }
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById(
+          "sourceCode"
+        ).innerHTML = document.getElementById("jsCode").innerHTML;
+      });
+    </script>
+  </body>
 </html>
