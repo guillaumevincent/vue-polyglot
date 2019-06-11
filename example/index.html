@@ -37,13 +37,6 @@
             {{ lang }}
           </button>
           <button
-            class="btn btn-warning"
-            type="button"
-            v-on:click="getTranslationAndShowAppInChinese()"
-          >
-            {{ $t("Load Chinese Translation") }}
-          </button>
-          <button
             class="btn btn-default"
             type="button"
             v-on:click="extendLocales()"
@@ -74,21 +67,24 @@
     <script id="jsCode">
       Vue.use(Polyglot, {
         defaultLanguage: "en",
-        languagesAvailable: ["fr", "es"]
+        languagesAvailable: ["fr", "es", "zh"]
       });
 
       Vue.locales({
         fr: {
           title: "Vue-Polyglot en Français",
           createdBy: "Créé par {user}",
-          "Load Chinese Translation": "Charger la traduction en chinois",
           "Update translation": "Mettre à jour les traductions"
         },
         es: {
           title: "Vue-Polyglot en Español",
           createdBy: "Creado por {user}",
-          "Load Chinese Translation": "Cargar Traducción Chino",
           "Update translation": "Actualizar traducción"
+        },
+        zh: {
+          title: "Vue-Polyglot在中国",
+          createdBy: "由{user}创建",
+          "Update translation": "更新翻译"
         }
       });
 
@@ -97,9 +93,6 @@
         methods: {
           showAppIn: function(lang) {
             this.$polyglot.setLang({ lang: lang });
-          },
-          getTranslationAndShowAppInChinese: function() {
-            this.$polyglot.getLocale({ lang: "zh" });
           },
           extendLocales() {
             this.$polyglot.extendLocales({

@@ -22,8 +22,6 @@
   "module": "src/polyglot.js",
   "repository": "guillaumevincent/vue-polyglot",
   "scripts": {
-    "precommit": "npm test",
-    "prepush": "npm test",
     "build": "rm -rf dist && webpack --mode=production",
     "test": "jest"
   },

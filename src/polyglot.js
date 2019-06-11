@@ -6,7 +6,6 @@ export function install(
   Vue,
   options = { languagesAvailable: [], defaultLanguage: "en-US" }
 ) {
-  console.log(Vue);
   if (!vm) {
     vm = new Vue({
       data() {
@@ -31,11 +30,6 @@ export function install(
         setLang({ lang }) {
           this.lang = lang;
         },
-        addLangInLanguagesAvailable({ lang }) {
-          if (this.languagesAvailable.indexOf(lang) === -1) {
-            this.languagesAvailable.push(lang);
-          }
-        },
         setLocale({ lang, locale }) {
           this.locales = Object.assign({}, this.locales, { [lang]: locale });
         },
@@ -57,18 +51,6 @@ export function install(
             navigatorLanguage,
             defaultLanguage
           );
-        },
-        getLocale({ baseURL = "i18n", lang = "auto", ext = ".json" } = {}) {
-          lang = lang === "auto" ? this.getLang() : lang;
-          if (lang !== options.defaultLanguage) {
-            fetch(`${baseURL}/${lang}${ext}`)
-              .then(response => response.json())
-              .then(locale => {
-                this.setLocale({ lang, locale });
-                this.setLang({ lang });
-                this.addLangInLanguagesAvailable({ lang });
-              });
-          }
         },
         _translate(key, fallbackMessage, data) {
           return i18n.translate(this.locale, key, fallbackMessage, data);
